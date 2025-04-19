@@ -1,7 +1,5 @@
-import base64
 import io
 import json
-import time
 import urllib.request
 
 import websocket
@@ -16,13 +14,7 @@ def load_workflow(filename="workflow.json"):
         return json.load(file)
 
 
-# def encode_image_to_base64(image_path):
-#     with open(image_path, "rb") as image_file:
-#         return base64.b64encode(image_file.read()).decode("utf-8")
-
-
 def update_workflow_with_prompt(workflow, prompt, negative_prompt, steps):
-    # UPDATE THIS VALUE DEPENDING ON THE NODE ID
     workflow["6"]["inputs"]["text"] = prompt
     workflow["7"]["inputs"]["text"] = negative_prompt
     workflow["3"]["inputs"]["steps"] = steps
@@ -100,7 +92,6 @@ def get_image(
 
 
 if __name__ == "__main__":
-    # Load workflow from JSON file
     import argparse
 
     parser = argparse.ArgumentParser(
@@ -127,6 +118,7 @@ if __name__ == "__main__":
     neg_prompt = args.neg_prompt
     steps = args.steps
 
+    # Load workflow from JSON file
     workflow = load_workflow()
     print("Workflow loaded successfully.")
 
